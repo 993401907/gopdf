@@ -1510,7 +1510,7 @@ func (gp *GoPdf) AddTTFFontByTTf(family string, parser core.TTFParser) error {
 	subsetFont.SetTtfFontOption(defaultTtfFontOption())
 	subsetFont.SetFamily(family)
 	subsetFont.SetTTFByTTFParser(parser)
-	return nil
+	return gp.setSubsetFontObject(subsetFont, family, defaultTtfFontOption())
 }
 
 // AddTTFFontByReader adds font data by reader.
