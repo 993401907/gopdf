@@ -5,6 +5,9 @@ import (
 	"bytes"
 	"compress/zlib" // for constants
 	"fmt"
+	"github.com/phpdave11/gofpdi"
+	"github.com/pkg/errors"
+	"github.com/signintech/gopdf/fontmaker/core"
 	"image"
 	"image/png"
 	"io"
@@ -14,9 +17,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"github.com/signintech/gopdf/fontmaker/core"
-	"github.com/phpdave11/gofpdi"
-	"github.com/pkg/errors"
 )
 
 const subsetFont = "SubsetFont"
@@ -1509,12 +1509,10 @@ func (gp *GoPdf) AddTTFFontByTTf(family string, parser core.TTFParser) error {
 	})
 	subsetFont.SetTtfFontOption(defaultTtfFontOption())
 	subsetFont.SetFamily(family)
-	err := subsetFont.SetTTF(parser)
-	if err != nil {
-		return err
-	}
+	subsetFont.SetTTFByTTFParser(parser)
+	return nil
+}
 
-	retu
 // AddTTFFontByReader adds font data by reader.
 func (gp *GoPdf) AddTTFFontData(family string, fontData []byte) error {
 	return gp.AddTTFFontDataWithOption(family, fontData, defaultTtfFontOption())
