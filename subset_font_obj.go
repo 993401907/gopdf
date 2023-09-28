@@ -123,7 +123,7 @@ func (s *SubsetFontObj) SetTTFByReader(rd io.Reader) error {
 
 // SetTTFByReader set ttf
 func (s *SubsetFontObj) SetTTFByTTFParser(parser core.TTFParser) {
-	s.ttfp = ttf
+	s.ttfp = parser
 }
 
 // SetTTFData set ttf
