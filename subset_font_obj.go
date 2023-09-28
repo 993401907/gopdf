@@ -121,6 +121,11 @@ func (s *SubsetFontObj) SetTTFByReader(rd io.Reader) error {
 	return nil
 }
 
+// SetTTFByReader set ttf
+func (s *SubsetFontObj) SetTTFByTTFParser(parser core.TTFParser) {
+	s.ttfp = ttf
+}
+
 // SetTTFData set ttf
 func (s *SubsetFontObj) SetTTFData(data []byte) error {
 	useKerning := s.ttfFontOption.UseKerning

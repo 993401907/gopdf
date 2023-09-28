@@ -14,7 +14,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
+	"github.com/signintech/gopdf/fontmaker/core"
 	"github.com/phpdave11/gofpdi"
 	"github.com/pkg/errors"
 )
@@ -1501,6 +1501,20 @@ func (gp *GoPdf) SetAnchor(name string) {
 	gp.anchors[name] = anchorOption{gp.curr.IndexOfPageObj, y}
 }
 
+// AddTTFFontByReader adds font file by reader.
+func (gp *GoPdf) AddTTFFontByTTf(family string, parser core.TTFParser) error {
+	subsetFont := new(SubsetFontObj)
+	subsetFont.init(func() *GoPdf {
+		return gp
+	})
+	subsetFont.SetTtfFontOption(defaultTtfFontOption())
+	subsetFont.SetFamily(family)
+	err := subsetFont.SetTTF(parser)
+	if err != nil {
+		return err
+	}
+
+	retu
 // AddTTFFontByReader adds font data by reader.
 func (gp *GoPdf) AddTTFFontData(family string, fontData []byte) error {
 	return gp.AddTTFFontDataWithOption(family, fontData, defaultTtfFontOption())
