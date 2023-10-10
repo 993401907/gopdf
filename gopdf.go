@@ -1247,7 +1247,7 @@ func (gp *GoPdf) MultiCellWithOption(rectangle *Rect, text string, opt CellOptio
 			gp.SetX(x)
 			totalLineHeight = totalLineHeight + lineHeight
 			line = nil
-			if opt.WrapLeft {
+			if opt.WrapLeft && opt.Align == Right {
 				opt.Align = Left
 			}
 		}
