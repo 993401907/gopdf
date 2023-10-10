@@ -25,5 +25,6 @@ type CellOption struct {
 	CoefLineHeight         float64
 	CoefUnderlineThickness float64
 
+	WrapLeft         bool
 	extGStateIndexes []int
 }
