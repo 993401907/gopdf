@@ -1233,7 +1233,7 @@ func (gp *GoPdf) MultiCellWithOption(rectangle *Rect, text string, opt CellOptio
 		return err
 	}
 	gp.PointsToUnitsVar(&lineHeight)
-
+	fristLine := true
 	for i, v := range []rune(text) {
 		if totalLineHeight+lineHeight > rectangle.H {
 			break
@@ -1247,9 +1247,13 @@ func (gp *GoPdf) MultiCellWithOption(rectangle *Rect, text string, opt CellOptio
 			gp.SetX(x)
 			totalLineHeight = totalLineHeight + lineHeight
 			line = nil
-			if opt.WrapLeft && opt.Align == Right {
+			if opt.WrapLeft && opt.Align == Right && fristLine {
 				opt.Align = Left
+				subWidth := rectangle.W - lineWidth
+				rectangle.W = lineWidth
+				x = x + subWidth
 			}
+			fristLine = false
 		}
 
 		line = append(line, v)
