@@ -1244,7 +1244,6 @@ func (gp *GoPdf) MultiCellWithOption(rectangle *Rect, text string, opt CellOptio
 		if lineWidth+runeWidth > rectangle.W {
 			gp.CellWithOption(&Rect{W: rectangle.W, H: lineHeight}, string(line), opt)
 			gp.Br(lineHeight)
-			gp.SetX(x)
 			totalLineHeight = totalLineHeight + lineHeight
 			line = nil
 			if opt.WrapLeft && opt.Align == Right && fristLine {
@@ -1253,6 +1252,7 @@ func (gp *GoPdf) MultiCellWithOption(rectangle *Rect, text string, opt CellOptio
 				rectangle.W = lineWidth
 				x = x + subWidth
 			}
+			gp.SetX(x)
 			fristLine = false
 		}
 
